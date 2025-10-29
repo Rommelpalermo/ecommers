@@ -33,8 +33,7 @@ include 'includes/header.php';
                         <div class="row align-items-center">
                             <div class="col-md-2">
                                 <img src="<?php echo $item['main_image'] ? UPLOAD_URL . $item['main_image'] : 'assets/images/no-image.jpg'; ?>" 
-                                     class="img-fluid rounded" alt="<?php echo htmlspecialchars($item['name']); ?>"
-                                     style="max-height: 100px; object-fit: cover;">
+                                     class="img-fluid rounded cart-item-image" alt="<?php echo htmlspecialchars($item['name']); ?>">
                             </div>
                             <div class="col-md-4">
                                 <h6 class="mb-1"><?php echo htmlspecialchars($item['name']); ?></h6>
@@ -44,10 +43,10 @@ include 'includes/header.php';
                             <div class="col-md-2">
                                 <div class="price-section">
                                     <?php if ($item['sale_price']): ?>
-                                        <span class="fw-bold text-primary">$<?php echo number_format($item['sale_price'], 2); ?></span>
-                                        <br><small class="text-muted text-decoration-line-through">$<?php echo number_format($item['price'], 2); ?></small>
+                                        <span class="fw-bold text-primary">₱<?php echo number_format($item['sale_price'], 2); ?></span>
+                                        <br><small class="text-muted text-decoration-line-through">₱<?php echo number_format($item['price'], 2); ?></small>
                                     <?php else: ?>
-                                        <span class="fw-bold text-primary">$<?php echo number_format($item['price'], 2); ?></span>
+                                        <span class="fw-bold text-primary">₱<?php echo number_format($item['price'], 2); ?></span>
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -68,7 +67,7 @@ include 'includes/header.php';
                             </div>
                             <div class="col-md-2 text-end">
                                 <div class="mb-2">
-                                    <strong>$<?php echo number_format(($item['sale_price'] ?: $item['price']) * $item['quantity'], 2); ?></strong>
+                                    <strong>₱<?php echo number_format(($item['sale_price'] ?: $item['price']) * $item['quantity'], 2); ?></strong>
                                 </div>
                                 <button class="btn btn-danger btn-sm remove-from-cart" data-product-id="<?php echo $item['product_id']; ?>">
                                     <i class="fas fa-trash"></i>
@@ -97,7 +96,7 @@ include 'includes/header.php';
                 
                 <div class="d-flex justify-content-between">
                     <span>Subtotal:</span>
-                    <span id="cart-subtotal">$<?php echo number_format($cartTotal, 2); ?></span>
+                    <span id="cart-subtotal">₱<?php echo number_format($cartTotal, 2); ?></span>
                 </div>
                 
                 <div class="d-flex justify-content-between">
@@ -107,14 +106,14 @@ include 'includes/header.php';
                 
                 <div class="d-flex justify-content-between">
                     <span>Tax:</span>
-                    <span>$<?php echo number_format($cartTotal * 0.08, 2); ?></span>
+                    <span>₱<?php echo number_format($cartTotal * 0.08, 2); ?></span>
                 </div>
                 
                 <hr>
                 
                 <div class="d-flex justify-content-between fw-bold">
                     <span>Total:</span>
-                    <span id="cart-total">$<?php echo number_format($cartTotal * 1.08, 2); ?></span>
+                    <span id="cart-total">₱<?php echo number_format($cartTotal * 1.08, 2); ?></span>
                 </div>
                 
                 <div class="d-grid mt-3">

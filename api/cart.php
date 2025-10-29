@@ -18,12 +18,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
     
-    $action = $input['action'] ?? '';
+    $action = isset($input['action']) ? $input['action'] : '';
     
     switch ($action) {
         case 'add':
-            $productId = intval($input['product_id'] ?? 0);
-            $quantity = intval($input['quantity'] ?? 1);
+            $productId = intval(isset($input['product_id']) ? $input['product_id'] : 0);
+            $quantity = intval(isset($input['quantity']) ? $input['quantity'] : 1);
             
             if ($productId <= 0 || $quantity <= 0) {
                 $response['message'] = 'Invalid product ID or quantity';
@@ -35,8 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
             
         case 'update':
-            $productId = intval($input['product_id'] ?? 0);
-            $quantity = intval($input['quantity'] ?? 0);
+            $productId = intval(isset($input['product_id']) ? $input['product_id'] : 0);
+            $quantity = intval(isset($input['quantity']) ? $input['quantity'] : 0);
             
             if ($productId <= 0) {
                 $response['message'] = 'Invalid product ID';
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
             
         case 'remove':
-            $productId = intval($input['product_id'] ?? 0);
+            $productId = intval(isset($input['product_id']) ? $input['product_id'] : 0);
             
             if ($productId <= 0) {
                 $response['message'] = 'Invalid product ID';
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
     }
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $action = $_GET['action'] ?? '';
+    $action = isset($_GET['action']) ? $_GET['action'] : '';
     
     switch ($action) {
         case 'items':

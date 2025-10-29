@@ -219,7 +219,7 @@ function updateCartTotal() {
         if (data.success) {
             const totalElement = document.getElementById('cart-total');
             if (totalElement) {
-                totalElement.textContent = '$' + data.total.toFixed(2);
+                totalElement.textContent = '₱' + data.total.toFixed(2);
             }
         }
     })
@@ -316,9 +316,9 @@ function hideLoading() {
 }
 
 function formatCurrency(amount) {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-PH', {
         style: 'currency',
-        currency: 'USD'
+        currency: 'PHP'
     }).format(amount);
 }
 

@@ -25,6 +25,48 @@ body {
     align-items: center;
 }
 
+/* Hero Image Placeholder */
+.hero-image-placeholder {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.hero-image-placeholder:hover {
+    transform: scale(1.02);
+}
+
+.hero-image-placeholder::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.hero-image-placeholder .text-center {
+    position: relative;
+    z-index: 2;
+}
+
+@media (max-width: 768px) {
+    .hero-image-placeholder {
+        height: 300px !important;
+        margin-top: 2rem;
+    }
+    
+    .hero-image-placeholder h3 {
+        font-size: 1.5rem;
+    }
+    
+    .hero-image-placeholder .fa-5x {
+        font-size: 3rem !important;
+    }
+}
+
 /* Card Hover Effects */
 .hover-shadow {
     transition: all 0.3s ease;
@@ -42,6 +84,88 @@ body {
 
 .card:hover .card-img-top {
     transform: scale(1.05);
+}
+
+/* Product Image Styling */
+.product-images .main-image {
+    background: #f8f9fa;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.product-images .main-image img {
+    width: 100% !important;
+    height: 450px !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    transition: transform 0.3s ease;
+}
+
+.product-images .main-image:hover img {
+    transform: scale(1.05);
+}
+
+/* Product Thumbnail Images */
+.product-images .thumbnail-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.product-images .thumbnail-image:hover,
+.product-images .thumbnail-image.active {
+    border-color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+/* Product Card Images (for listings) */
+.product-card-image {
+    height: 200px !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    padding: 10px;
+    background: #f8f9fa;
+    transition: transform 0.3s ease;
+}
+
+.product-card-image:hover {
+    transform: scale(1.02);
+}
+
+/* Cart Item Images */
+.cart-item-image {
+    max-height: 80px !important;
+    width: 80px !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    padding: 5px;
+    background: #f8f9fa;
+    border-radius: 5px;
+}
+
+/* Responsive Product Images */
+@media (max-width: 768px) {
+    .product-images .main-image img {
+        height: 300px !important;
+        padding: 15px;
+    }
+    
+    .product-images .thumbnail-image {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .product-card-image {
+        height: 180px !important;
+        padding: 8px;
+    }
 }
 
 /* Price Styling */

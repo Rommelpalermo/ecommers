@@ -146,10 +146,10 @@ INSERT INTO categories (name, description) VALUES
 ('Home & Garden', 'Home improvement and garden supplies');
 
 INSERT INTO products (name, description, short_description, sku, price, category_id, stock_quantity, is_featured) VALUES
-('Smartphone Pro', 'Latest smartphone with advanced features', 'High-end smartphone', 'PHONE001', 699.99, 1, 50, TRUE),
-('Laptop Ultra', 'High-performance laptop for professionals', 'Professional laptop', 'LAPTOP001', 1299.99, 1, 25, TRUE),
-('T-Shirt Basic', 'Comfortable cotton t-shirt', 'Cotton t-shirt', 'TSHIRT001', 19.99, 2, 100, FALSE),
-('Programming Book', 'Learn web development', 'Web development guide', 'BOOK001', 39.99, 3, 75, FALSE);
+('Smartphone Pro', 'Latest smartphone with advanced features', 'High-end smartphone', 'PHONE001', 35000.00, 1, 50, TRUE),
+('Laptop Ultra', 'High-performance laptop for professionals', 'Professional laptop', 'LAPTOP001', 65000.00, 1, 25, TRUE),
+('T-Shirt Basic', 'Comfortable cotton t-shirt', 'Cotton t-shirt', 'TSHIRT001', 999.00, 2, 100, FALSE),
+('Programming Book', 'Learn web development', 'Web development guide', 'BOOK001', 1999.00, 3, 75, FALSE);
 
 -- Create admin user (password: admin123)
 INSERT INTO users (username, email, password, first_name, last_name, is_admin) VALUES

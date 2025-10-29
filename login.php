@@ -6,8 +6,8 @@ require_once 'includes/Cart.php';
 $auth = new Auth($pdo);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = trim($_POST['username'] ?? '');
-    $password = $_POST['password'] ?? '';
+    $username = trim(isset($_POST['username']) ? $_POST['username'] : '');
+    $password = isset($_POST['password']) ? $_POST['password'] : '';
     
     if (empty($username) || empty($password)) {
         $_SESSION['error'] = 'Please fill in all fields';
@@ -25,6 +25,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $pageTitle = 'Login';
+
+// Check if user just registered
+if (isset($_GET['registered']) && $_GET['registered'] == '1') {
+    if (!isset($_SESSION['success'])) {
+        $_SESSION['success'] = 'Registration successful! Please login with your new account.';
+    }
+}
+
 include 'includes/header.php';
 ?>
 
@@ -40,7 +48,7 @@ include 'includes/header.php';
                     <div class="mb-3">
                         <label for="username" class="form-label">Username or Email</label>
                         <input type="text" class="form-control" id="username" name="username" 
-                               value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>" required>
+                               value="<?php echo htmlspecialchars(isset($_POST['username']) ? $_POST['username'] : ''); ?>" required>
                     </div>
                     
                     <div class="mb-3">

@@ -1,3 +1,9 @@
+<?php
+// Include necessary classes for header functionality
+if (!class_exists('Cart')) {
+    require_once __DIR__ . '/Cart.php';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,8 +79,16 @@
                             <i class="fas fa-shopping-cart"></i>
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">
                                 <?php
-                                $cart = new Cart($pdo, isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null);
-                                echo $cart->getItemCount();
+                                try {
+                                    if (isset($pdo) && $pdo instanceof PDO) {
+                                        $cart = new Cart($pdo, isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null);
+                                        echo $cart->getItemCount();
+                                    } else {
+                                        echo '0';
+                                    }
+                                } catch (Exception $e) {
+                                    echo '0';
+                                }
                                 ?>
                             </span>
                         </a>

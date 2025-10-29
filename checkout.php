@@ -27,25 +27,25 @@ $user = $auth->getCurrentUser();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Process checkout
-    $paymentMethod = $_POST['payment_method'] ?? '';
+    $paymentMethod = isset($_POST['payment_method']) ? $_POST['payment_method'] : '';
     $billingAddress = [
-        'first_name' => $_POST['billing_first_name'] ?? '',
-        'last_name' => $_POST['billing_last_name'] ?? '',
-        'address' => $_POST['billing_address'] ?? '',
-        'city' => $_POST['billing_city'] ?? '',
-        'state' => $_POST['billing_state'] ?? '',
-        'zip' => $_POST['billing_zip'] ?? '',
-        'country' => $_POST['billing_country'] ?? 'US'
+        'first_name' => isset($_POST['billing_first_name']) ? $_POST['billing_first_name'] : '',
+        'last_name' => isset($_POST['billing_last_name']) ? $_POST['billing_last_name'] : '',
+        'address' => isset($_POST['billing_address']) ? $_POST['billing_address'] : '',
+        'city' => isset($_POST['billing_city']) ? $_POST['billing_city'] : '',
+        'state' => isset($_POST['billing_state']) ? $_POST['billing_state'] : '',
+        'zip' => isset($_POST['billing_zip']) ? $_POST['billing_zip'] : '',
+        'country' => isset($_POST['billing_country']) ? $_POST['billing_country'] : 'PH'
     ];
     
     $shippingAddress = [
-        'first_name' => $_POST['shipping_first_name'] ?? $billingAddress['first_name'],
-        'last_name' => $_POST['shipping_last_name'] ?? $billingAddress['last_name'],
-        'address' => $_POST['shipping_address'] ?? $billingAddress['address'],
-        'city' => $_POST['shipping_city'] ?? $billingAddress['city'],
-        'state' => $_POST['shipping_state'] ?? $billingAddress['state'],
-        'zip' => $_POST['shipping_zip'] ?? $billingAddress['zip'],
-        'country' => $_POST['shipping_country'] ?? $billingAddress['country']
+        'first_name' => isset($_POST['shipping_first_name']) ? $_POST['shipping_first_name'] : $billingAddress['first_name'],
+        'last_name' => isset($_POST['shipping_last_name']) ? $_POST['shipping_last_name'] : $billingAddress['last_name'],
+        'address' => isset($_POST['shipping_address']) ? $_POST['shipping_address'] : $billingAddress['address'],
+        'city' => isset($_POST['shipping_city']) ? $_POST['shipping_city'] : $billingAddress['city'],
+        'state' => isset($_POST['shipping_state']) ? $_POST['shipping_state'] : $billingAddress['state'],
+        'zip' => isset($_POST['shipping_zip']) ? $_POST['shipping_zip'] : $billingAddress['zip'],
+        'country' => isset($_POST['shipping_country']) ? $_POST['shipping_country'] : $billingAddress['country']
     ];
     
     // Validate required fields
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Calculate totals
             $subtotal = $cartTotal;
             $taxAmount = $subtotal * 0.08; // 8% tax
-            $shippingAmount = $subtotal >= 50 ? 0 : 9.99; // Free shipping over $50
+            $shippingAmount = $subtotal >= 2500 ? 0 : 500; // Free shipping over ₱2,500
             $totalAmount = $subtotal + $taxAmount + $shippingAmount;
             
             // Insert order
@@ -286,7 +286,7 @@ include 'includes/header.php';
                             <small><?php echo htmlspecialchars($item['name']); ?></small>
                             <br><small class="text-muted">Qty: <?php echo $item['quantity']; ?></small>
                         </div>
-                        <small>$<?php echo number_format(($item['sale_price'] ?: $item['price']) * $item['quantity'], 2); ?></small>
+                        <small>₱<?php echo number_format(($item['sale_price'] ?: $item['price']) * $item['quantity'], 2); ?></small>
                     </div>
                 <?php endforeach; ?>
                 
@@ -294,24 +294,24 @@ include 'includes/header.php';
                 
                 <div class="d-flex justify-content-between">
                     <span>Subtotal:</span>
-                    <span>$<?php echo number_format($cartTotal, 2); ?></span>
+                    <span>₱<?php echo number_format($cartTotal, 2); ?></span>
                 </div>
                 
                 <div class="d-flex justify-content-between">
                     <span>Shipping:</span>
-                    <span><?php echo $cartTotal >= 50 ? 'Free' : '$9.99'; ?></span>
+                    <span><?php echo $cartTotal >= 2500 ? 'Free' : '₱500.00'; ?></span>
                 </div>
                 
                 <div class="d-flex justify-content-between">
                     <span>Tax (8%):</span>
-                    <span>$<?php echo number_format($cartTotal * 0.08, 2); ?></span>
+                    <span>₱<?php echo number_format($cartTotal * 0.08, 2); ?></span>
                 </div>
                 
                 <hr>
                 
                 <div class="d-flex justify-content-between fw-bold">
                     <span>Total:</span>
-                    <span>$<?php echo number_format($cartTotal + ($cartTotal >= 50 ? 0 : 9.99) + ($cartTotal * 0.08), 2); ?></span>
+                    <span>₱<?php echo number_format($cartTotal + ($cartTotal >= 2500 ? 0 : 500) + ($cartTotal * 0.08), 2); ?></span>
                 </div>
             </div>
         </div>

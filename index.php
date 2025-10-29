@@ -47,7 +47,14 @@ include 'includes/header.php';
                 </div>
             </div>
             <div class="col-lg-6">
-                <img src="assets/images/hero-shopping.jpg" alt="Shopping" class="img-fluid rounded shadow" style="max-height: 400px; object-fit: cover;">
+                <div class="hero-image-placeholder d-flex align-items-center justify-content-center rounded shadow" 
+                     style="height: 400px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <div class="text-center">
+                        <i class="fas fa-shopping-bag fa-5x mb-3 opacity-75"></i>
+                        <h3>Premium Shopping Experience</h3>
+                        <p class="mb-0">Quality Products • Fast Delivery • Secure Payments</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -87,8 +94,7 @@ include 'includes/header.php';
                     <div class="card h-100 shadow-sm hover-shadow">
                         <div class="position-relative">
                             <img src="<?php echo $product['main_image'] ? UPLOAD_URL . $product['main_image'] : 'assets/images/no-image.jpg'; ?>" 
-                                 class="card-img-top" alt="<?php echo htmlspecialchars($product['name']); ?>" 
-                                 style="height: 200px; object-fit: cover;">
+                                 class="card-img-top product-card-image" alt="<?php echo htmlspecialchars($product['name']); ?>">
                             <?php if ($product['sale_price']): ?>
                                 <span class="badge bg-danger position-absolute top-0 end-0 m-2">Sale</span>
                             <?php endif; ?>
@@ -105,10 +111,10 @@ include 'includes/header.php';
                             </div>
                             <div class="price-section mb-3">
                                 <?php if ($product['sale_price']): ?>
-                                    <span class="h6 text-primary">$<?php echo number_format($product['sale_price'], 2); ?></span>
-                                    <span class="text-muted text-decoration-line-through ms-2">$<?php echo number_format($product['price'], 2); ?></span>
+                                    <span class="h6 text-primary">₱<?php echo number_format($product['sale_price'], 2); ?></span>
+                                    <span class="text-muted text-decoration-line-through ms-2">₱<?php echo number_format($product['price'], 2); ?></span>
                                 <?php else: ?>
-                                    <span class="h6 text-primary">$<?php echo number_format($product['price'], 2); ?></span>
+                                    <span class="h6 text-primary">₱<?php echo number_format($product['price'], 2); ?></span>
                                 <?php endif; ?>
                             </div>
                             <div class="d-grid gap-2">
@@ -138,7 +144,7 @@ include 'includes/header.php';
             <div class="col-md-3 text-center mb-4">
                 <i class="fas fa-shipping-fast fa-3x text-primary mb-3"></i>
                 <h5>Fast Shipping</h5>
-                <p class="text-muted">Free shipping on orders over $50</p>
+                <p class="text-muted">Free shipping on orders over ₱2,500</p>
             </div>
             <div class="col-md-3 text-center mb-4">
                 <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
