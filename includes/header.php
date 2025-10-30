@@ -25,6 +25,33 @@ if (!class_exists('Cart')) {
     <?php endif; ?>
 </head>
 <body>
+    <!-- Top Social Bar -->
+    <div class="bg-light py-2 d-none d-md-block">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <small class="text-muted">
+                        <i class="fas fa-phone"></i> +63 123 456 7890 
+                        <span class="mx-2">|</span>
+                        <i class="fas fa-envelope"></i> info@ecommers.com
+                    </small>
+                </div>
+                <div class="col-md-6 text-end">
+                    <small class="text-muted me-3">Follow us:</small>
+                    <a href="https://www.facebook.com/" target="_blank" class="text-muted me-2" title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://twitter.com/" target="_blank" class="text-muted me-2" title="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.tiktok.com/" target="_blank" class="text-muted" title="TikTok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
@@ -43,6 +70,9 @@ if (!class_exists('Cart')) {
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo SITE_URL; ?>/products.php">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo SITE_URL; ?>/feedback.php">Feedback</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown">

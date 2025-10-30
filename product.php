@@ -337,6 +337,17 @@ include 'includes/header.php';
     </div>
 </div>
 
+<!-- Quick Feedback Widget -->
+<div class="row mt-4">
+    <div class="col-12">
+        <?php 
+        $productId = $product['id'];
+        $widgetTitle = 'Rate this Product';
+        include 'includes/quick-feedback-widget.php'; 
+        ?>
+    </div>
+</div>
+
 <!-- Related Products -->
 <?php if (!empty($relatedProducts)): ?>
 <div class="row mt-5">

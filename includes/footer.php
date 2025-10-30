@@ -29,10 +29,18 @@
                 <div class="col-md-3">
                     <h6>Follow Us</h6>
                     <div class="d-flex">
-                        <a href="#" class="text-muted me-3"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-muted me-3"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-muted me-3"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-muted"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.facebook.com/" target="_blank" class="text-muted me-3" title="Follow us on Facebook">
+                            <i class="fab fa-facebook-f fa-lg"></i>
+                        </a>
+                        <a href="https://twitter.com/" target="_blank" class="text-muted me-3" title="Follow us on Twitter">
+                            <i class="fab fa-twitter fa-lg"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/" target="_blank" class="text-muted me-3" title="Follow us on TikTok">
+                            <i class="fab fa-tiktok fa-lg"></i>
+                        </a>
+                        <a href="https://www.instagram.com/" target="_blank" class="text-muted" title="Follow us on Instagram">
+                            <i class="fab fa-instagram fa-lg"></i>
+                        </a>
                     </div>
                     <div class="mt-3">
                         <h6>Newsletter</h6>
