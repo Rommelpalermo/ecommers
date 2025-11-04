@@ -8,7 +8,7 @@ define('DB_PASS', '');
 define('DB_NAME', 'ecommerce_db');
 
 // Site configuration
-define('SITE_URL', 'http://localhost:8000');
+define('SITE_URL', 'http://localhost/Ecommers');
 define('SITE_NAME', 'E-Commerce Platform');
 define('UPLOAD_PATH', __DIR__ . '/../uploads/');
 define('UPLOAD_URL', SITE_URL . '/uploads/');
