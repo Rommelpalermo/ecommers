@@ -5,26 +5,48 @@
         <div class="container py-4">
             <div class="row">
                 <div class="col-md-3">
-                    <h5><?php echo SITE_NAME; ?></h5>
-                    <p class="text-muted">Your one-stop shop for quality products at great prices.</p>
+                    <h5><i class="fas fa-gavel text-warning me-2"></i><?php echo SITE_NAME; ?></h5>
+                    <p class="text-muted">Your trusted auction house for quality items at great prices.</p>
+                    <div class="contact-info">
+                        <p class="mb-1 text-light">
+                            <i class="fas fa-phone text-warning me-2"></i>
+                            <small>09512723785</small>
+                        </p>
+                        <p class="mb-0 text-light">
+                            <i class="fas fa-envelope text-warning me-2"></i>
+                            <small>jbrincestrading0716@gmail.com</small>
+                        </p>
+                    </div>
                 </div>
                 <div class="col-md-3">
-                    <h6>Quick Links</h6>
+                    <h6><i class="fas fa-clock text-warning me-2"></i>Auction Schedule</h6>
+                    <ul class="list-unstyled">
+                        <li class="text-muted">
+                            <strong class="text-warning">Face-to-Face Auction:</strong><br>
+                            <small>Wed & Sat: 10:00am - 6:00pm</small>
+                        </li>
+                        <li class="text-muted mt-2">
+                            <strong class="text-warning">Online Auction:</strong><br>
+                            <small>Daily: 7:00pm - 9:00pm</small><br>
+                            <small class="text-info">www.jbrincesbid.com</small>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6><i class="fas fa-map-marker-alt text-warning me-2"></i>Location & Info</h6>
                     <ul class="list-unstyled">
                         <li><a href="<?php echo SITE_URL; ?>" class="text-muted text-decoration-none">Home</a></li>
-                        <li><a href="<?php echo SITE_URL; ?>/products.php" class="text-muted text-decoration-none">Products</a></li>
+                        <li><a href="<?php echo SITE_URL; ?>/products.php" class="text-muted text-decoration-none">Auction Items</a></li>
                         <li><a href="<?php echo SITE_URL; ?>/about.php" class="text-muted text-decoration-none">About Us</a></li>
                         <li><a href="<?php echo SITE_URL; ?>/contact.php" class="text-muted text-decoration-none">Contact</a></li>
                     </ul>
-                </div>
-                <div class="col-md-3">
-                    <h6>Customer Service</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="<?php echo SITE_URL; ?>/shipping.php" class="text-muted text-decoration-none">Shipping Info</a></li>
-                        <li><a href="<?php echo SITE_URL; ?>/returns.php" class="text-muted text-decoration-none">Returns</a></li>
-                        <li><a href="<?php echo SITE_URL; ?>/faq.php" class="text-muted text-decoration-none">FAQ</a></li>
-                        <li><a href="<?php echo SITE_URL; ?>/support.php" class="text-muted text-decoration-none">Support</a></li>
-                    </ul>
+                    <div class="mt-2">
+                        <small class="text-muted">
+                            <i class="fas fa-building text-warning me-1"></i>
+                            0261 D San Luis St. Purob 6,<br>
+                            Landayan, San Pedro, Laguna
+                        </small>
+                    </div>
                 </div>
                 <div class="col-md-3">
                     <h6>Follow Us</h6>
