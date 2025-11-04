@@ -98,6 +98,16 @@ include '../includes/header.php';
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link text-white" href="add_item.php">
+                            <i class="fas fa-plus"></i> Add Auction Item
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="manage_items.php">
+                            <i class="fas fa-boxes"></i> Manage Items
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link text-white active" href="feedback.php">
                             <i class="fas fa-comments"></i> Feedback
                         </a>

@@ -135,7 +135,18 @@ if (!class_exists('Cart')) {
                                 <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/orders.php">My Orders</a></li>
                                 <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/admin/">Admin Panel</a></li>
+                                    <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/admin/add_item.php">
+                                        <i class="fas fa-plus me-2"></i>Add Auction Item
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/admin/manage_items.php">
+                                        <i class="fas fa-boxes me-2"></i>Manage Items
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/admin/feedback.php">
+                                        <i class="fas fa-comments me-2"></i>Manage Feedback
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/admin/ratings.php">
+                                        <i class="fas fa-star me-2"></i>Manage Ratings
+                                    </a></li>
                                 <?php endif; ?>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/logout.php">Logout</a></li>

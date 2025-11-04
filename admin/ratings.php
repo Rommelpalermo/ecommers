@@ -147,6 +147,12 @@ $stats = $stats_stmt->fetch();
                 <i class="fas fa-star me-2"></i>Product Ratings Management
             </a>
             <div class="d-flex">
+                <a href="add_item.php" class="btn btn-outline-success me-2">
+                    <i class="fas fa-plus me-1"></i>Add Item
+                </a>
+                <a href="manage_items.php" class="btn btn-outline-info me-2">
+                    <i class="fas fa-boxes me-1"></i>Manage Items
+                </a>
                 <a href="feedback.php" class="btn btn-outline-light me-2">
                     <i class="fas fa-comments me-1"></i>Feedback
                 </a>
