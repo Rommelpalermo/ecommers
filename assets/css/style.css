@@ -444,6 +444,42 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
 }
 
+/* Dropdown Menu Fix - Ensure it appears above other elements */
+.dropdown-menu {
+    z-index: 9999 !important;
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 10px 0;
+    margin-top: 5px;
+}
+
+.dropdown-item {
+    color: var(--text-light) !important;
+    padding: 8px 20px;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    margin: 2px 10px;
+}
+
+.dropdown-item:hover {
+    background: var(--primary-color) !important;
+    color: white !important;
+    transform: translateX(5px);
+}
+
+.dropdown-item i {
+    width: 20px;
+    text-align: center;
+}
+
+.dropdown-divider {
+    border-color: var(--glass-border);
+    margin: 8px 0;
+}
+
 /* Top Social Bar Dark Theme */
 .bg-light {
     background: var(--glass-bg) !important;

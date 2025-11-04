@@ -146,7 +146,7 @@ try {
             <div class="col-md-3">
                 <div class="card text-center">
                     <div class="card-body">
-                        <h3 class="text-info"><?php echo count(array_filter($items, fn($item) => $item['auction_status'] === 'upcoming')); ?></h3>
+                        <h3 class="text-info"><?php echo count(array_filter($items, function($item) { return $item['auction_status'] === 'upcoming'; })); ?></h3>
                         <p class="mb-0">Upcoming Auctions</p>
                     </div>
                 </div>
@@ -154,7 +154,7 @@ try {
             <div class="col-md-3">
                 <div class="card text-center">
                     <div class="card-body">
-                        <h3 class="text-success"><?php echo count(array_filter($items, fn($item) => $item['auction_status'] === 'active')); ?></h3>
+                        <h3 class="text-success"><?php echo count(array_filter($items, function($item) { return $item['auction_status'] === 'active'; })); ?></h3>
                         <p class="mb-0">Active Auctions</p>
                     </div>
                 </div>
@@ -162,7 +162,7 @@ try {
             <div class="col-md-3">
                 <div class="card text-center">
                     <div class="card-body">
-                        <h3 class="text-warning"><?php echo count(array_filter($items, fn($item) => $item['auction_status'] === 'sold')); ?></h3>
+                        <h3 class="text-warning"><?php echo count(array_filter($items, function($item) { return $item['auction_status'] === 'sold'; })); ?></h3>
                         <p class="mb-0">Sold Items</p>
                     </div>
                 </div>
