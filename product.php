@@ -2,6 +2,8 @@
 require_once 'config/database.php';
 require_once 'includes/Auth.php';
 require_once 'includes/Cart.php';
+require_once 'includes/rating_functions.php';
+require_once 'includes/rating_form.php';
 
 $auth = new Auth($pdo);
 $cart = new Cart($pdo, isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null);
@@ -115,20 +117,26 @@ include 'includes/header.php';
             <!-- Product Title -->
             <h1 class="h3 mb-3"><?php echo htmlspecialchars($product['name']); ?></h1>
             
-            <!-- Product Rating & Reviews (placeholder) -->
+            <!-- Product Rating & Reviews -->
             <div class="mb-3">
-                <div class="d-flex align-items-center">
-                    <div class="stars text-warning me-2">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
+                <?php 
+                $ratingStats = getProductRatingStats($pdo, $product['id']);
+                if ($ratingStats['total_reviews'] > 0): 
+                ?>
+                    <div class="d-flex align-items-center">
+                        <?php echo displayStars($ratingStats['average_rating']); ?>
+                        <span class="text-muted ms-2">(<?php echo $ratingStats['average_rating']; ?> out of 5 stars)</span>
+                        <span class="text-muted ms-2">|</span>
+                        <a href="#reviews" class="text-decoration-none ms-2 text-warning"><?php echo $ratingStats['total_reviews']; ?> review<?php echo $ratingStats['total_reviews'] != 1 ? 's' : ''; ?></a>
                     </div>
-                    <span class="text-muted">(4.2 out of 5 stars)</span>
-                    <span class="text-muted ms-2">|</span>
-                    <a href="#reviews" class="text-decoration-none ms-2">12 reviews</a>
-                </div>
+                <?php else: ?>
+                    <div class="d-flex align-items-center">
+                        <?php echo displayStars(0); ?>
+                        <span class="text-muted ms-2">No reviews yet</span>
+                        <span class="text-muted ms-2">|</span>
+                        <a href="#reviews" class="text-decoration-none ms-2 text-warning">Be the first to review</a>
+                    </div>
+                <?php endif; ?>
             </div>
             
             <!-- Price -->
@@ -278,7 +286,7 @@ include 'includes/header.php';
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab">
-                    Reviews (12)
+                    Reviews (<?php echo $ratingStats['total_reviews']; ?>)
                 </button>
             </li>
         </ul>
@@ -330,7 +338,45 @@ include 'includes/header.php';
             <!-- Reviews Tab -->
             <div class="tab-pane fade" id="reviews" role="tabpanel">
                 <div class="p-4">
-                    <p class="text-muted">Product reviews feature coming soon!</p>
+                    <!-- Rating Overview -->
+                    <?php echo displayRatingOverview($pdo, $product['id']); ?>
+                    
+                    <!-- Sort Options -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5>Customer Reviews</h5>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown">
+                                Sort by: Newest
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" href="#" onclick="sortReviews('newest')">Newest</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="sortReviews('oldest')">Oldest</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="sortReviews('highest')">Highest Rating</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="sortReviews('lowest')">Lowest Rating</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="sortReviews('helpful')">Most Helpful</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Reviews List -->
+                    <div id="reviewsList">
+                        <?php echo displayReviews($pdo, $product['id']); ?>
+                    </div>
+                    
+                    <!-- Write Review Button -->
+                    <div class="text-center mb-4">
+                        <button class="btn btn-warning btn-lg" onclick="toggleReviewForm()">
+                            <i class="fas fa-edit me-2"></i>Write a Review
+                        </button>
+                    </div>
+                    
+                    <!-- Review Form (Initially Hidden) -->
+                    <div id="reviewFormContainer" style="display: none;">
+                        <?php 
+                        $isLoggedIn = isset($_SESSION['user_id']);
+                        echo displayRatingForm($product['id'], $isLoggedIn); 
+                        ?>
+                    </div>
                 </div>
             </div>
         </div>
@@ -467,6 +513,98 @@ function shareProduct() {
         navigator.clipboard.writeText(window.location.href).then(() => {
             showAlert('Product URL copied to clipboard!', 'success');
         });
+    }
+}
+
+// Review functionality
+function toggleReviewForm() {
+    const container = document.getElementById('reviewFormContainer');
+    if (container.style.display === 'none') {
+        container.style.display = 'block';
+        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        // Change button text
+        const btn = document.querySelector('button[onclick="toggleReviewForm()"]');
+        btn.innerHTML = '<i class="fas fa-times me-2"></i>Cancel Review';
+        btn.onclick = function() { hideReviewForm(); };
+    }
+}
+
+function hideReviewForm() {
+    const container = document.getElementById('reviewFormContainer');
+    container.style.display = 'none';
+    
+    // Reset button
+    const btn = document.querySelector('button[onclick="hideReviewForm()"]');
+    btn.innerHTML = '<i class="fas fa-edit me-2"></i>Write a Review';
+    btn.onclick = function() { toggleReviewForm(); };
+}
+
+function sortReviews(sortType) {
+    const productId = <?php echo $product['id']; ?>;
+    const reviewsList = document.getElementById('reviewsList');
+    
+    // Show loading
+    reviewsList.innerHTML = '<div class="text-center py-4"><i class="fas fa-spinner fa-spin"></i> Loading reviews...</div>';
+    
+    fetch(`api/get_reviews.php?product_id=${productId}&sort=${sortType}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                reviewsList.innerHTML = data.html;
+                
+                // Update dropdown text
+                const dropdownBtn = document.getElementById('sortDropdown');
+                const sortNames = {
+                    'newest': 'Newest',
+                    'oldest': 'Oldest', 
+                    'highest': 'Highest Rating',
+                    'lowest': 'Lowest Rating',
+                    'helpful': 'Most Helpful'
+                };
+                dropdownBtn.textContent = `Sort by: ${sortNames[sortType]}`;
+            } else {
+                reviewsList.innerHTML = '<div class="text-center py-4 text-muted">Error loading reviews</div>';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            reviewsList.innerHTML = '<div class="text-center py-4 text-muted">Error loading reviews</div>';
+        });
+}
+
+function markHelpful(ratingId) {
+    fetch('api/mark_helpful.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `rating_id=${ratingId}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Update the count
+            const btn = document.querySelector(`button[onclick="markHelpful(${ratingId})"]`);
+            btn.innerHTML = `<i class="fas fa-thumbs-up me-1"></i>Helpful (${data.new_count})`;
+            btn.disabled = true;
+            btn.classList.add('text-success');
+            
+            showAlert(data.message, 'success');
+        } else {
+            showAlert(data.message, 'warning');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showAlert('Error occurred. Please try again.', 'error');
+    });
+}
+
+function reportReview(ratingId) {
+    if (confirm('Are you sure you want to report this review?')) {
+        // This would typically send a report to admin
+        showAlert('Review reported. Thank you for your feedback.', 'info');
     }
 }
 </script>

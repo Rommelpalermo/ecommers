@@ -84,6 +84,14 @@ include 'includes/header.php';
     </div>
 </section>
 
+<!-- Customer Reviews Summary -->
+<section class="rating-summary-section mb-5">
+    <div class="container">
+        <h2 class="text-center mb-4">What Our Customers Say</h2>
+        <?php include 'includes/rating_summary_widget.php'; ?>
+    </div>
+</section>
+
 <!-- Featured Products Section -->
 <section id="featured" class="featured-products mb-5">
     <div class="container">

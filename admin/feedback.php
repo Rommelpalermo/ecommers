@@ -102,6 +102,11 @@ include '../includes/header.php';
                             <i class="fas fa-comments"></i> Feedback
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="ratings.php">
+                            <i class="fas fa-star"></i> Product Ratings
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
