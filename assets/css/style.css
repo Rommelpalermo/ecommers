@@ -407,6 +407,36 @@ h1, h2, h3, h4, h5, h6 {
     backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--glass-border);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1000;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.navbar-collapse {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.navbar-nav.me-auto {
+    flex-grow: 0;
+    margin-right: auto !important;
+}
+
+.navbar-nav:last-child {
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin-left: auto;
+    justify-content: flex-end;
+    display: flex;
+    align-items: center;
 }
 
 .navbar-brand {
@@ -444,9 +474,9 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
 }
 
-/* Dropdown Menu Fix - Ensure it appears above other elements */
+/* Dropdown Menu Fix - Ensure it appears above other elements including modals */
 .dropdown-menu {
-    z-index: 9999 !important;
+    z-index: 99999 !important;
     background: var(--glass-bg) !important;
     backdrop-filter: blur(15px);
     border: 1px solid var(--glass-border);
@@ -454,6 +484,7 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 10px;
     padding: 10px 0;
     margin-top: 5px;
+    position: absolute !important;
 }
 
 .dropdown-item {
@@ -478,6 +509,83 @@ h1, h2, h3, h4, h5, h6 {
 .dropdown-divider {
     border-color: var(--glass-border);
     margin: 8px 0;
+}
+
+/* Navbar specific dropdown positioning */
+.navbar .dropdown-menu {
+    z-index: 99999 !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: auto !important;
+    right: 0 !important;
+    transform: translateX(0) !important;
+    min-width: 200px;
+    margin-top: 8px;
+    margin-right: 0;
+}
+
+.navbar .nav-item.dropdown {
+    position: relative !important;
+}
+
+/* Alternative: Make dropdown open to the left side */
+.navbar .dropdown-menu.dropdown-menu-end {
+    right: 0 !important;
+    left: auto !important;
+    transform: translateX(0) !important;
+}
+
+/* Ensure proper alignment for the last nav item */
+.navbar-nav .nav-item:last-child .dropdown-menu {
+    right: 0 !important;
+    left: auto !important;
+}
+
+/* Push Admin button further to the right */
+.navbar-nav .nav-item.dropdown {
+    margin-left: 15px !important;
+    margin-right: 20px !important;
+    position: relative;
+    z-index: 1001;
+}
+
+/* Add padding to navbar to prevent overlap */
+.navbar .navbar-nav {
+    padding-right: 20px;
+}
+
+/* Ensure admin dropdown has enough space and visibility */
+.navbar .nav-item.dropdown .nav-link {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    white-space: nowrap;
+    background: rgba(255, 107, 53, 0.1) !important;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 107, 53, 0.3);
+    min-width: 100px;
+    text-align: center;
+    position: relative;
+    z-index: 1002;
+}
+
+/* Admin button hover effect */
+.navbar .nav-item.dropdown .nav-link:hover {
+    background: rgba(255, 107, 53, 0.2) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+/* Force visibility for search and cart items */
+.navbar-nav .nav-item:not(.dropdown) {
+    margin-right: 10px;
+    position: relative;
+    z-index: 999;
+}
+
+/* Ensure proper spacing between all nav items */
+.navbar-nav .nav-item {
+    display: flex;
+    align-items: center;
 }
 
 /* Top Social Bar Dark Theme */
@@ -817,6 +925,29 @@ footer .fa-instagram:hover {
     .hero-section {
         text-align: center;
         padding: 3rem 0;
+    }
+    
+    .navbar-nav .nav-item.dropdown {
+        margin-left: 10px !important;
+        margin-right: 15px !important;
+    }
+    
+    .navbar .navbar-nav {
+        padding-right: 15px;
+    }
+    
+    .navbar .nav-item.dropdown .nav-link {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        min-width: 80px;
+    }
+    
+    .navbar .container {
+        flex-wrap: wrap;
+    }
+    
+    .navbar-collapse {
+        width: 100%;
     }
     
     .hero-section .col-lg-6:first-child {

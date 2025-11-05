@@ -130,7 +130,7 @@ if (!class_exists('Cart')) {
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
                                 <i class="fas fa-user"></i> <?php echo htmlspecialchars($_SESSION['first_name']); ?>
                             </a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/profile.php">Profile</a></li>
                                 <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/orders.php">My Orders</a></li>
                                 <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
